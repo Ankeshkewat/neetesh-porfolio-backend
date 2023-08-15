@@ -118,10 +118,10 @@ app.get('/', validate, async (req, res) => {
     }
 })
 
-app.listen(8080, () => {
+app.listen(2001, () => {
     try {
         Connection;
-        console.log('Listening in port 8080')
+        console.log('Listening in port 2001')
     }
     catch (err) {
         console.error(err);
