@@ -108,7 +108,7 @@ app.delete('/delete', validate, async (req, res) => {
     }
 })
 
-app.get('/', validate, async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         res.status(200).send({ "msg": "Welcome to Neetesh Portfolio" });
     }
