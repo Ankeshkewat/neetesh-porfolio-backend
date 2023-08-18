@@ -25,7 +25,7 @@ const middleware = (req, res, next) => {
 /* Authantication */
 const validate = async (req, res, next) => {
     try {
-        let token = req.headers?.authorization.split(' ')[1];
+        let token = req.headers?.authorization?.split(' ')[1];
         if (!token) return res.status(401).json({ 'msg': "Your are not authorized" })
         const data = jwt.verify(token, "Secret")
          console.log(data)
@@ -36,7 +36,7 @@ const validate = async (req, res, next) => {
         }
     }
     catch (err) {
-        console.log()
+        console.log("Error is coming from Validate middleware")
         console.error(err)
         res.status(500).json({ 'msg': "Something went wrong" })
 
