@@ -5,6 +5,10 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(express.json());
+app.use(cors({
+    origin : "*"
+}));
+
 const { Connection } = require('./config/db.js');
 const { UserModal } = require('./modal/modal.js')
 const { UserRouter } = require('./routers/user.routr.js')
