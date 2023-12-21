@@ -63,7 +63,7 @@ app.get('/get',validate, async (req, res) => {
 })
 
 /* Post */
-app.post('/post', middleware, async (req, res) => {
+app.post('/post', async (req, res) => {
     try {
         const payload = req.body;
         const data = new UserModal(payload);
