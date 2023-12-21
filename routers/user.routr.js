@@ -29,7 +29,7 @@ UserRouter.post('/login', async (req, res) => {
         console.log(data);
         if (data) {
             if (data.password == password) {
-                const token = jwt.sign({ "email" : email}, "Secret")
+                const token = jwt.sign({ "email" : email,"password" : password}, "Secret")
                 res.status(200).send({ 'msg': "Logic success", "token":token })
             } else {
                 res.status(401).send({ 'msg': "Incorrect password" })

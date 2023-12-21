@@ -32,7 +32,7 @@ const validate = async (req, res, next) => {
         let token = req.headers?.authorization?.split(' ')[1];
         if (!token) return res.status(401).json({ 'msg': "Your are not authorized" })
         const data = jwt.verify(token, "Secret")
-         console.log(data)
+         console.log("data :",data);
         if (data.email.toLowerCase().includes('neetesh')) {
             next()
         } else {
@@ -101,8 +101,17 @@ app.patch('/update',validate, async (req, res) => {
 /* Delete */
 app.delete('/delete', validate, async (req, res) => {
     try {
+        const token = req.headers?.authorization?.split(' ')[1];
+
         const text = req.body.text;
-        if (!text) return res.status(401).send({ 'msg': "Please provide all details" })
+        const password = req.body.password;
+
+        if (!text || !password) return res.status(401).send({ 'msg': "Please provide all details" });
+       
+        const data = jwt.verify(token, "Secret");
+        if(password != data.password){
+            return res.status(401).send({"msg":"Incorrect passwored"});
+        }
         await UserModal.deleteOne({ "text": text });
         res.status(200).send({ 'msg': "Post Deleted" });
     }
