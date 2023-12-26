@@ -11,7 +11,7 @@ app.use(cors({
 
 const { Connection } = require('./config/db.js');
 const { UserModal } = require('./modal/modal.js')
-const { UserRouter } = require('./routers/user.routr.js')
+const { UserRouter } = require('./routers/user.router.js')
 
 app.post('/register', UserRouter);
 app.post('/login', UserRouter);
@@ -107,6 +107,9 @@ app.delete('/delete', validate, async (req, res) => {
         const password = req.body.password;
 
         if (!text || !password) return res.status(401).send({ 'msg': "Please provide all details" });
+        let all_data = await UserModal.find({"text":text.trim()});
+        console.log("all_data",all_data);
+        if(all_data.length <= 0) return res.status(404).send({"msg":"Post not found"});
        
         const data = jwt.verify(token, "Secret");
         if(password != data.password){

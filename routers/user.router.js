@@ -26,7 +26,6 @@ UserRouter.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         let data = await UserModal.findOne({ "email": email });
-        console.log(data);
         if (data) {
             if (data.password == password) {
                 const token = jwt.sign({ "email" : email,"password" : password}, "Secret")
