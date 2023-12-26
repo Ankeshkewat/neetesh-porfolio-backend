@@ -62,6 +62,17 @@ app.get('/get',validate, async (req, res) => {
     }
 })
 
+app.get("/get/data",async(req,res)=>{
+    try {
+        const data = await UserModal.find({});
+        res.status(200).json({ 'msg': "Data fetched successfully", "data": data });
+    }
+    catch (err) {
+        console.log("Error in getting data ", err);
+        res.status(500).send({ 'msg': 'Something went wrong' });
+    }
+})
+
 /* Post */
 app.post('/post', validate, async (req, res) => {
     try {
